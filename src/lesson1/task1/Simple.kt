@@ -51,7 +51,8 @@ fun main(args: Array<String>) {
  * Пользователь задает время в часах, минутах и секундах, например, 8:20:35.
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
-fun seconds(hours: Int, minutes: Int, seconds: Int): Int = TODO()
+fun seconds(hours: Int, minutes: Int, seconds: Int): Int = 60*60*hours + 60*minutes
+
 
 /**
  * Тривиальная
@@ -86,6 +87,8 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = TODO()
  */
 fun thirdDigit(number: Int): Int = TODO()
 
+
+
 /**
  * Простая
  *
@@ -102,7 +105,11 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun accountInThreeYears(initial: Int, percent: Int): Double = TODO()
+fun accountInThreeYears(initial: Int, percent: Int): Double = initial * pow((1 + 10 / 100).toDouble(), 3.0)
+
+
+
+
 
 /**
  * Простая
@@ -110,4 +117,7 @@ fun accountInThreeYears(initial: Int, percent: Int): Double = TODO()
  * Пользователь задает целое трехзначное число (например, 478).
  *Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
-fun numberRevert(number: Int): Int = TODO()
+fun numberRevert(number: Int): Int =(number % 10) * 100 + ((number / 10) % 10)* 10 + number / 100
+
+
+
