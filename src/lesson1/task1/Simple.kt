@@ -51,7 +51,7 @@ fun main(args: Array<String>) {
  * Пользователь задает время в часах, минутах и секундах, например, 8:20:35.
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
-fun seconds(hours: Int, minutes: Int, seconds: Int): Int = 60*60*hours + 60*minutes
+fun seconds(hours: Int, minutes: Int, seconds: Int): Int = 60*60*hours + 60*minutes + seconds
 
 
 /**
@@ -98,7 +98,7 @@ fun thirdDigit(number: Int): Int = (number / 100) % 10
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
 fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int {
-    val time_1: Int = hoursDepart * 60 + minutesDepart
+    val time_1: Int = hoursDepart * 60 +  minutesDepart
     val time_2: Int = hoursArrive * 60 + minutesArrive
     val time: Int = time_2 - time_1
     return time
@@ -107,11 +107,11 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
 /**
  * Простая
  *
- * Человек положил в банк сумму в s рублей под p% годовых (проценты начисляются в конце года).
+ * Человек положил в банк сумму в s рублей под p% годовых (проц енты начисляются в конце года).
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun accountInThreeYears(initial: Int, percent: Int): Double = initial * pow((1 + 10 / 100).toDouble(), 3.0)
+fun accountInThreeYears(initial: Int, percent: Int): Double = initial * pow((1 + percent / 100).toDouble(), 3.0)
 
 
 
