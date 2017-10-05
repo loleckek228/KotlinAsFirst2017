@@ -2,6 +2,7 @@
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import kotlin.system.measureTimeMillis
 
 /**
  * Пример
@@ -33,7 +34,18 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String = TODO()
+fun ageDescription(age: Int): String  {
+        val x1 = age % 10
+        val x2 = age % 100
+        return when {
+            x2 in 5..20 -> "@age  лет"
+            x1 == 1 -> "@age  год"
+            x1 in 2..4 -> "@age года"
+            else -> "@age лет"
+        }
+}
+
+
 
 /**
  * Простая
@@ -44,7 +56,20 @@ fun ageDescription(age: Int): String = TODO()
  */
 fun timeForHalfWay(t1: Double, v1: Double,
                    t2: Double, v2: Double,
-                   t3: Double, v3: Double): Double = TODO()
+                   t3: Double, v3: Double): Double  {
+    val w1: Double = t1 * v1
+    val w2: Double = t2 * v2
+    val w3: Double = t3 * v3
+    val half_w: Double = (w1 + w2 + w3) / 2
+    return when {
+        half_w < w1 -> half_w / v1
+        half_w < w1 + w2 -> t1 + (half_w - w1)/ v2
+        else -> t1 + t2 + (half_w - w1 - w2) / v3
+    }
+
+
+
+}
 
 /**
  * Простая
@@ -69,7 +94,7 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
  * и 3, если угроза есть и от ладьи и от слона.
  * Считать, что ладья и слон не могут загораживать друг друга.
  */
-fun rookOrBishopThreatens(kingX: Int, kingY: Int,
+    fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
                           bishopX: Int, bishopY: Int): Int = TODO()
 
