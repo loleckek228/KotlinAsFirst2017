@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson3.task1
 
 /**
@@ -34,7 +35,7 @@ fun isPrime(n: Int): Boolean {
  */
 fun isPerfect(n: Int): Boolean {
     var sum = 1
-    for (m in 2..n/2) {
+    for (m in 2..n / 2) {
         if (n % m > 0) continue
         sum += m
         if (sum > n) break
@@ -61,6 +62,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Например, число 1 содержит 1 цифру, 456 -- 3 цифры, 65536 -- 5 цифр.
  */
 fun digitNumber(n: Int): Int = TODO()
+
 /**
  * Простая
  *
@@ -81,19 +83,16 @@ fun lcm(m: Int, n: Int): Int {
     var number_n = n
     return if (number_m == number_n) {
         number_m
-    }
-    else {
+    } else {
         while (number_m != number_n) {
             if (number_m > number_n) {
                 number_m -= number_n
-            }
-            else {
+            } else {
                 number_n -= number_m
-                }
             }
-        prod / number_m
         }
-
+        prod / number_m
+    }
 }
 
 
