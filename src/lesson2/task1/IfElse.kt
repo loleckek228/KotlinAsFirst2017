@@ -84,15 +84,16 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX2: Int, rookY2: Int): Int  {
     var x1 = 0
     var y1 = 0
-    if (kingX == rookX1 || kingX == rookX2) x1++
-    if (kingY == rookY1 || kingY == rookY2) y1++
-    when {
-        x1 + y1 > 1 -> return 3
-        y1 == 1 -> return 2
-        x1 == 1 -> return 1
-        else -> return 0
+    if (kingX == rookX1 || kingY == rookY1) x1++
+    if (kingX == rookX2 || kingY == rookY2) y1++
+    return when {
+        x1 == 1 -> 1
+        y1 == 1 -> 2
+        x1 + y1 > 1 -> 3
+        else -> 0
     }
 }
+
 
 /**
  * Простая
@@ -106,7 +107,7 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
  */
 fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
-                          bishopX: Int, bishopY: Int): Int = TODO()
+                          bishopX: Int, bishopY: Int): Int =  TODO()
 
 /**
  * Простая
