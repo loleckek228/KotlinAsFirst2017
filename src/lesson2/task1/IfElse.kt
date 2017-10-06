@@ -81,7 +81,7 @@ fun timeForHalfWay(t1: Double, v1: Double,
  */
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
-                       rookX2: Int, rookY2: Int): Int  {
+                       rookX2: Int, rookY2: Int): Int {
     return if (((kingX == rookX1) || (kingY == rookY1)) && ((kingX == rookX2) || (kingY == rookY2))) 3
     else if ((kingX == rookX1) || (kingY == rookY1)) 1
     else if ((kingX == rookX2) || (kingY == rookY2)) 2
@@ -101,7 +101,7 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
  */
 fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
-                          bishopX: Int, bishopY: Int): Int =  TODO()
+                          bishopX: Int, bishopY: Int): Int = TODO()
 
 /**
  * Простая
@@ -123,10 +123,10 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
     when {
-        (a <= c && b <= d && b >= c) -> b - c
-        (a <= c && b >= d) -> d - c
-        (a >= c && b >= d && a <= d) -> d - a
-        (a >= c && b <= d) -> b - a
+        ((a <= c) && (b <= d) && (b >= c)) -> b - c
+        ((a <= c) && (b >= d)) -> d - c
+        ((a >= c) && (b >= d) && (a <= d)) -> d - a
+        ((a >= c) && (b <= d)) -> b - a
     }
     return -1
 }
