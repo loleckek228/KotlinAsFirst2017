@@ -3,6 +3,7 @@
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.sqr
 import kotlin.system.measureTimeMillis
 
 /**
@@ -60,14 +61,12 @@ fun timeForHalfWay(t1: Double, v1: Double,
     val w1: Double = t1 * v1
     val w2: Double = t2 * v2
     val w3: Double = t3 * v3
-    val half_w: Double = (w1 + w2 + w3) / 2
+    val halfWay: Double = (w1 + w2 + w3) / 2
     return when {
-        half_w < w1 -> half_w / v1
-        half_w < w1 + w2 -> t1 + (half_w - w1) / v2
-        else -> t1 + t2 + (half_w - w1 - w2) / v3
+        halfWay < w1 -> halfWay / v1
+        halfWay < w1 + w2 -> t1 + (halfWay - w1) / v2
+        else -> t1 + t2 + (halfWay - w1 - w2) / v3
     }
-
-
 }
 
 /**
@@ -81,12 +80,13 @@ fun timeForHalfWay(t1: Double, v1: Double,
  */
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
-                       rookX2: Int, rookY2: Int): Int {
-    return if (((kingX == rookX1) || (kingY == rookY1)) && ((kingX == rookX2) || (kingY == rookY2))) 3
-    else if ((kingX == rookX1) || (kingY == rookY1)) 1
-    else if ((kingX == rookX2) || (kingY == rookY2)) 2
-    else 0
-}
+                       rookX2: Int, rookY2: Int): Int =
+        when {
+            (((kingX == rookX1) || (kingY == rookY1)) && ((kingX == rookX2) || (kingY == rookY2))) -> 3
+            ((kingX == rookX1) || (kingY == rookY1)) -> 1
+            ((kingX == rookX2) || (kingY == rookY2)) -> 2
+            else -> 0
+        }
 
 
 /**
@@ -111,7 +111,17 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    val sqr_a = sqr(a)
+    val sqr_b = sqr(b)
+    val sqr_c = sqr(c)
+    return when {
+        a > b + c || b > a + c || c > a + b -> -1
+        sqr_a == sqr_b + sqr_c || sqr_b == sqr_a + sqr_c || sqr_c == sqr_a + sqr_b -> 1
+        sqr_a > sqr_b + sqr_c || sqr_b > sqr_a + sqr_c || sqr_c > sqr_a + sqr_b -> 2
+        else -> -1
+    }
+}
 
 /**
  * Средняя
@@ -121,18 +131,10 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
-    if ((a <= c) && (b <= d) && (b >= c))
-        return b - c
-    else
-        if ((a <= c) && (b >= d))
-            return d - c
-        else
-            if ((a >= c) && (b >= d) && (a <= d))
-                return d - a
-            else
-                if ((a >= c) && (b <= d))
-                    return b - a
-                else
-                    return -1
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = when {
+    (a <= c) && (b <= d) && (b >= c) -> b - c
+    (a <= c) && (b >= d) -> d - c
+    (a >= c) && (b >= d) && (a <= d) -> d - a
+    (a >= c) && (b <= d) -> b - a
+    else -> -1
 }

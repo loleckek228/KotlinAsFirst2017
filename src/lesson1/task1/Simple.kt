@@ -61,7 +61,8 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int = 60*60*hours + 60*minu
  * Определить длину того же отрезка в метрах (в данном случае 18.98).
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
-fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = (48 * sagenes + 16 * arshins +  vershoks ) *  0.04445
+fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double =
+        (48 * sagenes + 16 * arshins +  vershoks ) *  0.04445
 
 /**
  * Тривиальная
@@ -69,7 +70,7 @@ fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = (48 * sa
  * Пользователь задает угол в градусах, минутах и секундах (например, 36 градусов 14 минут 35 секунд).
  * Вывести значение того же угла в радианах (например, 0.63256).
  */
-fun angleInRadian(grad: Int, min: Int, sec: Int): Double = (grad + min / 60 + sec / 3600) * PI / 180.0
+fun angleInRadian(grad: Int, min: Int, sec: Int): Double = ((grad + min / 60 + sec / 3600) * PI) / 180.0
 
 
 /**
@@ -97,12 +98,8 @@ fun thirdDigit(number: Int): Int = (number / 100) % 10
  * прибыл на станцию назначения в h2 часов m2 минут того же дня (например в 13:01).
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
-fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int {
-    val time_1: Int = hoursDepart * 60 +  minutesDepart
-    val time_2: Int = hoursArrive * 60 + minutesArrive
-    val time: Int = time_2 - time_1
-    return time
-}
+fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int =
+        ((hoursArrive * 60 + minutesArrive) - ( hoursDepart * 60 +  minutesDepart))
 
 /**
  * Простая
@@ -111,10 +108,7 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun accountInThreeYears(initial: Int, percent: Int): Double = initial * pow(((1 + percent) / 100.0), 3.0)
-
-
-
+fun accountInThreeYears(initial: Int, percent: Int): Double = initial * pow((1 + percent / 100.0), 3.0)
 
 
 /**
