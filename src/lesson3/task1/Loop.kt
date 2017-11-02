@@ -62,11 +62,12 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Например, число 1 содержит 1 цифру, 456 -- 3 цифры, 65536 -- 5 цифр.
  */
 fun digitNumber(n: Int): Int {
+    var number = n
     var k = 0
-    while (n > 0) {
-        n % 10
+    if ( n == 0) return 1
+    while (number > 0) {
         k++
-        n / 10
+        number /= 10
     }
     return k
 }
@@ -204,14 +205,18 @@ fun isPalindrome(n: Int): Boolean = revert(n) == n
  */
 fun hasDifferentDigits(n: Int): Boolean {
     var newN = n
-    while (newN % 10 == (newN / 10) % 10 && newN > 10){
-        newN /= 10
-        return true
-    }
-    return false
+    do {
+        if (newN % 10 == (newN / 10) % 10 && newN > 10) return true
+            newN /= 10
+    } while(newN > 0 )
+        return false
+
+
 }
 
-/**
+
+
+    /**
  * Сложная
  *
  * Найти n-ю цифру последовательности из квадратов целых чисел:
