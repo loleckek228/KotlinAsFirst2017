@@ -214,8 +214,6 @@ fun hasDifferentDigits(n: Int): Boolean {
 
 }
 
-
-
     /**
  * Сложная
  *
