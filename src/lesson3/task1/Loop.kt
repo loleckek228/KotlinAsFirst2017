@@ -66,6 +66,7 @@ fun digitNumber(n: Int): Int {
     while (n > 0) {
         n % 10
         k++
+        n / 10
     }
     return k
 }
@@ -178,10 +179,10 @@ fun cos(x: Double, eps: Double): Double = TODO()
  */
 fun revert(n: Int): Int {
     var revertN = 0
-    var N = n
-    while (N > 0) {
-        revertN = revertN * 10 + N % 10
-        N /= 10
+    var number = n
+    while (number > 0) {
+        revertN = revertN * 10 + number % 10
+        number /= 10
     }
     return revertN
 }
@@ -202,12 +203,12 @@ fun isPalindrome(n: Int): Boolean = revert(n) == n
  * Например, 54 и 323 состоят из разных цифр, а 111 и 0 из одинаковых.
  */
 fun hasDifferentDigits(n: Int): Boolean {
-    val number = n % 10
-    return when {
-        number == 0 -> false
-        number != n / 10 % 10 -> true
-        else -> false
+    var newN = n
+    while (newN % 10 == (newN / 10) % 10 && newN > 10){
+        newN /= 10
+        return true
     }
+    return false
 }
 
 /**
