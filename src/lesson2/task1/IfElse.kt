@@ -4,7 +4,6 @@ package lesson2.task1
 
 import lesson1.task1.discriminant
 import lesson1.task1.sqr
-import kotlin.system.measureTimeMillis
 
 /**
  * Пример
@@ -101,7 +100,16 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
  */
 fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
-                          bishopX: Int, bishopY: Int): Int = TODO()
+                          bishopX: Int, bishopY: Int): Int {
+    val X = Math.abs(kingX - bishopX)
+    val Y = Math.abs(kingY - bishopY)
+    return when {
+        (((kingX == rookX) || (kingY == rookY))) -> 1
+        X == Y -> 2
+        ((kingX == rookX) || (kingY == rookY) && (X == Y)) ->3
+        else -> 0
+    }
+}
 
 /**
  * Простая
@@ -112,14 +120,14 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    val sqr_a = sqr(a)
-    val sqr_b = sqr(b)
-    val sqr_c = sqr(c)
+    val A = sqr(a)
+    val B = sqr(b)
+    val C = sqr(c)
     return when {
-        a > b + c || b > a + c || c > a + b -> -1
-        sqr_a == sqr_b + sqr_c || sqr_b == sqr_a + sqr_c || sqr_c == sqr_a + sqr_b -> 1
-        sqr_a > sqr_b + sqr_c || sqr_b > sqr_a + sqr_c || sqr_c > sqr_a + sqr_b -> 2
-        else -> -1
+        (a > b + c || b > a + c || c > a + b) -> -1
+        (A == B + C || B == A + C || C == A + B) -> 1
+        (A > B + C || B > A + C || C > A + B) -> 2
+        else -> 0
     }
 }
 
