@@ -239,7 +239,7 @@ fun squareSequenceDigit(n: Int): Int {
         }
         while(k != n){
             k --
-            number / 10
+            number /= 10
         }
         return number % 10
     }
