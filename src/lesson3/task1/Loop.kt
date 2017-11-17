@@ -2,6 +2,8 @@
 
 package lesson3.task1
 
+import lesson8.task1.markdownToHtml
+
 /**
  * Пример
  *
@@ -107,7 +109,7 @@ fun lcm(m: Int, n: Int): Int = TODO()
 fun minDivisor(n: Int): Int {
     if (isPrime(n)) return n
     else
-        for (i in 2..n)
+        for (i in 2..Math.sqrt(n.toDouble()).toInt())
             if (n % i == 0) {
                 return i
             }
@@ -119,16 +121,7 @@ fun minDivisor(n: Int): Int {
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int {
-    if (isPrime(n)) return 1
-    else
-        for (i in n / 2 downTo 1) {
-            if (n % i == 0) {
-                return i
-            }
-        }
-    return n
-}
+fun maxDivisor(n: Int): Int = n / minDivisor(n)
 
 /**
  * Простая
@@ -160,7 +153,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
     for (i in m..n) {
-        val sqrtI = Math.pow(i.toDouble(), 0.5)
+        val sqrtI = Math.sqrt(i.toDouble())
         if (sqrtI % 1 == 0.0) return true
     }
     return false
@@ -221,7 +214,6 @@ fun hasDifferentDigits(n: Int): Boolean {
     while (newN > 0) {
         if (modN != newN % 10) {
             return true
-            break
         } else {
             newN /= 10
         }

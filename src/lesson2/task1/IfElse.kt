@@ -101,12 +101,12 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
 fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
                           bishopX: Int, bishopY: Int): Int {
-    val X = Math.abs(bishopX - kingX)
-    val Y = Math.abs(bishopY - kingY)
+    val abcX = Math.abs(kingX - bishopX)
+    val abcY = Math.abs(kingY - bishopY)
     return when {
-        kingX == rookX || kingY == rookY && X == Y -> 3
+        kingX == rookX || kingY == rookY && abcX == abcY -> 3
+        abcX == abcY -> 2
         kingX == rookX || kingY == rookY -> 1
-        X == Y -> 2
         else -> 0
     }
 }
@@ -120,13 +120,13 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    val A = sqr(a)
-    val B = sqr(b)
-    val C = sqr(c)
+    val sqrA = sqr(a)
+    val sqrB = sqr(b)
+    val sqrC = sqr(c)
     return when {
         (a > b + c || b > a + c || c > a + b) -> -1
-        (A == B + C || B == A + C || C == A + B) -> 1
-        (A > B + C || B > A + C || C > A + B) -> 2
+        (sqrA == sqrB + sqrC || sqrB == sqrA + sqrC || sqrC == sqrA + sqrB) -> 1
+        (sqrA > sqrB + sqrC || sqrB > sqrA + sqrC || sqrC > sqrA + sqrB) -> 2
         else -> 0
     }
 }
