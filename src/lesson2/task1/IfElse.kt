@@ -105,8 +105,8 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
     val abcY = Math.abs(kingY - bishopY)
     return when {
         kingX == rookX || kingY == rookY && abcX == abcY -> 3
-        abcX == abcY -> 2
         kingX == rookX || kingY == rookY -> 1
+        abcX == abcY -> 2
         else -> 0
     }
 }
