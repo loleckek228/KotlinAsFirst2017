@@ -95,6 +95,10 @@ class Tests {
     @Test
     @Tag("Normal")
     fun center() {
+        assertArrayEquals(
+                listOf(1.0, -1.0, 0.0).toDoubleArray(),
+                center(mutableListOf(3.0, 1.0, 2.0)).toDoubleArray(),
+                1e-5)
         assertEquals(listOf<Double>(), center(mutableListOf()))
         assertArrayEquals(
                 listOf(0.0).toDoubleArray(),
