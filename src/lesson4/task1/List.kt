@@ -181,7 +181,14 @@ fun polynom(p: List<Double>, x: Double): Double {
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Double>): MutableList<Double> = TODO()
+fun accumulate(list: MutableList<Double>): MutableList<Double> {
+    var result = 0.0
+    for (i in 0 until list.size){
+        list[i] += result
+        result = list[i]
+    }
+    return list
+}
 
 /**
  * Средняя
@@ -210,8 +217,7 @@ fun factorize(n: Int): List<Int> {
  * Разложить заданное натуральное число n > 1 на простые множители.
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  */
-fun factorizeToString(n: Int): String = TODO()
-
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
 /**
  * Средняя
  *
@@ -219,7 +225,15 @@ fun factorizeToString(n: Int): String = TODO()
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> {
+    var result = mutableListOf<Int>()
+    var newN =n
+    while (newN > 0) {
+        result.add(newN % base)
+        newN /= base
+    }
+    return result.reversed()
+}
 
 /**
  * Сложная
@@ -229,7 +243,21 @@ fun convert(n: Int, base: Int): List<Int> = TODO()
  * строчными буквами: 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String {
+    val numbers = convert(n, base)
+    val result = StringBuilder("")
+    val words = ("abcdefghijklmnopqrstuvwxyz")
+    for (i in 0 until numbers.size) {
+        if (numbers[i] < 9) {
+            result.append(numbers[i].toString())
+        } else {
+            result.append(words[numbers[i] - 10])
+
+        }
+    }
+    return result.toString()
+}
+
 
 /**
  * Средняя
@@ -238,7 +266,15 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    var result = 0
+    var k = 0
+    for ( i in (digits.size - 1) downTo  0){
+        result += digits[i] * Math.pow(base.toDouble(), k.toDouble()).toInt()
+        k++
+    }
+    return result
+}
 
 /**
  * Сложная
@@ -249,7 +285,19 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: str = "13c", base = 14 -> 250
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int {
+    val list = mutableListOf<Int>()
+    for (i in  str){
+        if (i in 'a'..'z'){
+            list.add(i - 'a' + 10)
+        }
+        else {
+            list.add(i.toString().toInt())
+        }
+    }
+    return decimal(list, base)
+}
+
 
 /**
  * Сложная
