@@ -251,7 +251,7 @@ fun convertToString(n: Int, base: Int): String {
     val result = StringBuilder("")
     val words = ("abcdefghijklmnopqrstuvwxyz")
     for (i in 0 until numbers.size) {
-        if (numbers[i] < 9) {
+        if (numbers[i] <= 9) {
             result.append(numbers[i].toString())
         } else {
             result.append(words[numbers[i] - 10])
