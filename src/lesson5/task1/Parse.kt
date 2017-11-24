@@ -66,7 +66,32 @@ fun main(args: Array<String>) {
  * День и месяц всегда представлять двумя цифрами, например: 03.04.2011.
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateStrToDigit(str: String): String = TODO()
+fun dateStrToDigit(str: String): String {
+    val months =
+            listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа",
+                    "сентября", "октября", "ноября", "декабря")
+    val parts = str.split(" ")
+    try {
+        if (parts.size == 3) {
+            val day = parts[0].toInt()
+            val month = months.indexOf(parts[1]) + 1
+            val year = parts[2].toInt()
+            if (month == 0) {
+                return ""
+
+            }
+            else {
+                return String.format("%02d.%02d.%d", day, month , year)
+            }
+        }
+        else
+            return ""
+    }
+    catch (e: NumberFormatException) {
+        return ""
+    }
+}
+
 
 /**
  * Средняя
@@ -75,7 +100,25 @@ fun dateStrToDigit(str: String): String = TODO()
  * Перевести её в строковый формат вида "15 июля 2016".
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateDigitToStr(digital: String): String = TODO()
+fun dateDigitToStr(digital: String): String {
+    val parts = digital.split(".")
+    val months =
+            listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа",
+                    "сентября", "октября", "ноября", "декабря")
+    try {
+        if (parts.size == 3 && parts[1] != "00") {
+            val day = parts[0].toInt()
+            val month = months[parts[1].toInt() - 1]
+            val year = parts[2].toInt()
+            return String.format("%d %s %s", day, month , year)
+        }
+        else
+            return ""
+    }
+    catch (e: NumberFormatException) {
+        return ""
+    }
+}
 
 /**
  * Средняя
@@ -89,7 +132,22 @@ fun dateDigitToStr(digital: String): String = TODO()
  * Все символы в номере, кроме цифр, пробелов и +-(), считать недопустимыми.
  * При неверном формате вернуть пустую строку
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
+fun flattenPhoneNumber(phone: String): String {
+    var result = ""
+    var value = listOf(' ', '+','-','(',')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+    if (phone.isEmpty())
+        return ""
+    if (phone.first() == '+')
+        result += "+"
+    for (element in phone) {
+        if (element in '1'..'9')
+            result += element
+        else
+            if (element !in value)
+                return ""
+    }
+    return result
+}
 
 /**
  * Средняя
