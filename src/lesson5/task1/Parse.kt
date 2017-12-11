@@ -2,6 +2,8 @@
 
 package lesson5.task1
 
+import lesson8.task2.parseExpr
+
 /**
  * Пример
  *
@@ -190,6 +192,8 @@ fun bestHighJump(jumps: String): Int {
     var result = -1
     if (parts.size == 1)
         return -1
+    for (k in 1..parts.lastIndex step 2){
+    }
     for (i in 0..parts.lastIndex step 2){
         if (parts[i + 1] == "+")
             if (parts[i].toInt() >= result)
@@ -217,11 +221,10 @@ fun plusMinus(expression: String): Int  {
                 "-" -> result -= parts[i + 1].toInt()
             }
         }
-
+        return result
     } catch (e: NumberFormatException) {
         throw IllegalArgumentException()
     }
-    return result
 }
 
 /**
