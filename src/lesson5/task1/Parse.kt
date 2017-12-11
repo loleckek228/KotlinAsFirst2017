@@ -212,12 +212,9 @@ fun plusMinus(expression: String): Int  {
     var result = parts[0].toInt()
     try {
         for (i in 1 until parts.size step 2){
-            if (parts.size == 1)
-                return parts[0].toInt()
             when (parts[i]){
                 "+" ->  result += parts[i + 1].toInt()
                 "-" -> result -= parts[i + 1].toInt()
-                else -> throw IllegalArgumentException()
             }
         }
 
