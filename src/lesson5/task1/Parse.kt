@@ -111,7 +111,7 @@ fun dateDigitToStr(digital: String): String {
             val year = parts[2].toInt()
             return String.format("%d %s %s", day, month, year)
         } catch (e: NumberFormatException) {
-        return ""
+            return ""
         }
     } else
         return ""
@@ -221,7 +221,7 @@ fun plusMinus(expression: String): Int {
         }
         return result
     } catch (e: NumberFormatException) {
-        throw IllegalArgumentException()
+        throw IllegalArgumentException(NumberFormatException("For input string : $expression"))
     }
 }
 
