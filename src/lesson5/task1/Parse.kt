@@ -101,19 +101,20 @@ fun dateDigitToStr(digital: String): String {
     val months =
             listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа",
                     "сентября", "октября", "ноября", "декабря")
-    try {
-        if (parts[1].toInt() == 0)
-            return ""
-        if (parts.size == 3) {
+    if (parts.size == 3) {
+        try {
+            if (parts[1].toInt() == 0)
+                return ""
+
             val day = parts[0].toInt()
             val month = months[parts[1].toInt() - 1]
             val year = parts[2].toInt()
             return String.format("%d %s %s", day, month, year)
-        } else
-            return ""
-    } catch (e: NumberFormatException) {
+        } catch (e: NumberFormatException) {
         return ""
-    }
+        }
+    } else
+        return ""
 }
 
 /**
