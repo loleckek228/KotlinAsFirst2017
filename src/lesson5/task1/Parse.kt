@@ -190,14 +190,11 @@ fun bestLongJump(jumps: String): Int {
 fun bestHighJump(jumps: String): Int {
     val parts = jumps.split(" ")
     var result = -1
-    if (parts.size == 1)
-        return -1
-    for (k in 1..parts.lastIndex step 2){
-    }
-    for (i in 0..parts.lastIndex step 2){
-        if (parts[i + 1] == "+")
-            if (parts[i].toInt() >= result)
-                result = parts[i].toInt()
+    for (i in 1..parts.lastIndex step 2) {
+        for (k in parts[i]) {
+            if ((k == '+') && (parts[i - 1].toInt() >= result))
+                result = parts[i - 1].toInt()
+        }
     }
     return result
 }
@@ -211,13 +208,13 @@ fun bestHighJump(jumps: String): Int {
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int  {
+fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
     var result = parts[0].toInt()
     try {
-        for (i in 1 until parts.size step 2){
-            when (parts[i]){
-                "+" ->  result += parts[i + 1].toInt()
+        for (i in 1 until parts.size step 2) {
+            when (parts[i]) {
+                "+" -> result += parts[i + 1].toInt()
                 "-" -> result -= parts[i + 1].toInt()
             }
         }
@@ -242,7 +239,7 @@ fun firstDuplicateIndex(str: String): Int {
     val parts = lowerStr.split(" ")
     for (i in 0..parts.size - 2) {
         if (parts[i] == parts[i + 1]) return result
-            result += parts[i].length + 1
+        result += parts[i].length + 1
     }
     return -1
 }
@@ -264,7 +261,7 @@ fun mostExpensive(description: String): String {
     var product = ""
     if (description.isEmpty())
         return ""
-    for (elements in parts){
+    for (elements in parts) {
         val part = elements.split(" ")
         if (part[1].toDouble() >= maxPrice) {
             maxPrice = part[1].toDouble()
