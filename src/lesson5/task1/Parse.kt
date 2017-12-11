@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson5.task1
 
 /**
@@ -48,12 +49,10 @@ fun main(args: Array<String>) {
         val seconds = timeStrToSeconds(line)
         if (seconds == -1) {
             println("Введённая строка $line не соответствует формату ЧЧ:ММ:СС")
-        }
-        else {
+        } else {
             println("Прошло секунд с начала суток: $seconds")
         }
-    }
-    else {
+    } else {
         println("Достигнут <конец файла> в процессе чтения строки. Программа прервана")
     }
 }
@@ -72,22 +71,17 @@ fun dateStrToDigit(str: String): String {
                     "сентября", "октября", "ноября", "декабря")
     val parts = str.split(" ")
     try {
-        if (parts.size == 3) {
-            val day = parts[0].toInt()
-            val month = months.indexOf(parts[1]) + 1
-            val year = parts[2].toInt()
-            if (month == 0) {
-                return ""
-
-            }
-            else {
-                return String.format("%02d.%02d.%d", day, month , year)
-            }
-        }
-        else
+        if (parts.size != 3)
             return ""
-    }
-    catch (e: NumberFormatException) {
+        val day = parts[0].toInt()
+        val month = months.indexOf(parts[1]) + 1
+        val year = parts[2].toInt()
+        if (month == 0) {
+            return ""
+        } else {
+            return String.format("%02d.%02d.%d", day, month, year)
+        }
+    } catch (e: NumberFormatException) {
         return ""
     }
 }
@@ -106,16 +100,16 @@ fun dateDigitToStr(digital: String): String {
             listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа",
                     "сентября", "октября", "ноября", "декабря")
     try {
-        if (parts.size == 3 && parts[1] != "00") {
+        if (parts[1].toInt() == 0)
+            return ""
+        if (parts.size == 3) {
             val day = parts[0].toInt()
             val month = months[parts[1].toInt() - 1]
             val year = parts[2].toInt()
-            return String.format("%d %s %s", day, month , year)
-        }
-        else
+            return String.format("%d %s %s", day, month, year)
+        } else
             return ""
-    }
-    catch (e: NumberFormatException) {
+    } catch (e: NumberFormatException) {
         return ""
     }
 }
@@ -133,20 +127,22 @@ fun dateDigitToStr(digital: String): String {
  * При неверном формате вернуть пустую строку
  */
 fun flattenPhoneNumber(phone: String): String {
-    var result = ""
-    var value = listOf(' ', '+','-','(',')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+    val value = listOf(' ', '+', '-', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+    val strBuilder = StringBuilder("")
     if (phone.isEmpty())
         return ""
     if (phone.first() == '+')
-        result += "+"
+        strBuilder.append('+')
     for (element in phone) {
         if (element in '1'..'9')
-            result += element
-        else
+            strBuilder.append(element)
+        else {
             if (element !in value)
                 return ""
+
+        }
     }
-    return result
+    return strBuilder.toString()
 }
 
 /**
@@ -165,14 +161,13 @@ fun bestLongJump(jumps: String): Int {
     val parts = jumps.split(" ")
     if (jumps.isEmpty())
         return -1
-    for (i in 0 until parts.size){
+    for (i in 0 until parts.size) {
         if (parts[i] !in symbol) {
             try {
-                if ( maxJump < parts[i].toInt()) {
+                if (maxJump < parts[i].toInt()) {
                     maxJump = parts[i].toInt()
                 }
-            }
-            catch (e: Exception){
+            } catch (e: NumberFormatException) {
                 return -1
             }
         }
@@ -190,7 +185,18 @@ fun bestLongJump(jumps: String): Int {
  * Прочитать строку и вернуть максимальную взятую высоту (230 в примере).
  * При нарушении формата входной строки вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    val parts = jumps.split(" ")
+    var result = -1
+    if (parts.size == 1)
+        return -1
+    for (i in 0..parts.lastIndex step 2){
+        if (parts[i + 1] == "+")
+            if (parts[i].toInt() >= result)
+                result = parts[i].toInt()
+    }
+    return result
+}
 
 /**
  * Сложная
@@ -201,7 +207,20 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int  {
+    val parts = expression.split(" ")
+    var result = parts[0].toInt()
+    for (i in 1 until parts.size step 2){
+        if (parts.size == 1)
+            return parts[0].toInt()
+        when (parts[i]){
+            "+" ->  result += parts[i + 1].toInt()
+            "-" -> result -= parts[i + 1].toInt()
+            else -> throw IllegalArgumentException()
+            }
+        }
+    return result
+}
 
 /**
  * Сложная
@@ -212,7 +231,16 @@ fun plusMinus(expression: String): Int = TODO()
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    var result = 0
+    val lowerStr = str.toLowerCase()
+    val parts = lowerStr.split(" ")
+    for (i in 0..parts.size - 2) {
+        if (parts[i] == parts[i + 1]) return result
+            result += parts[i].length + 1
+    }
+    return -1
+}
 
 /**
  * Сложная
@@ -225,7 +253,21 @@ fun firstDuplicateIndex(str: String): Int = TODO()
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть положительными
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    val parts = description.split("; ")
+    var maxPrice = 0.0
+    var product = ""
+    if (description.isEmpty())
+        return ""
+    for (elements in parts){
+        val part = elements.split(" ")
+        if (part[1].toDouble() >= maxPrice) {
+            maxPrice = part[1].toDouble()
+            product = part[0]
+        }
+    }
+    return product
+}
 
 /**
  * Сложная

@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson4.task1
 
 import lesson1.task1.discriminant
@@ -108,11 +109,12 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  */
 fun abs(v: List<Double>): Double {
     var vector = 0.0
-    for (i in v){
+    for (i in v) {
         vector += Math.pow(i, 2.0)
     }
     return Math.sqrt(vector)
 }
+
 /**
  * Простая
  *
@@ -135,7 +137,7 @@ fun mean(list: List<Double>): Double {
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
     val number = mean(list)
-    for (i in 0 until list.size){
+    for (i in 0 until list.size) {
         list[i] -= number
     }
     return list
@@ -155,6 +157,7 @@ fun times(a: List<Double>, b: List<Double>): Double {
     }
     return vector
 }
+
 /**
  * Средняя
  *
@@ -165,8 +168,8 @@ fun times(a: List<Double>, b: List<Double>): Double {
  */
 fun polynom(p: List<Double>, x: Double): Double {
     var polynomial = 0.0
-    for (i in 0 until p.size){
-        polynomial += p[i] * Math.pow(x , i.toDouble())
+    for (i in 0 until p.size) {
+        polynomial += p[i] * Math.pow(x, i.toDouble())
     }
     return polynomial
 }
@@ -183,7 +186,7 @@ fun polynom(p: List<Double>, x: Double): Double {
  */
 fun accumulate(list: MutableList<Double>): MutableList<Double> {
     var result = 0.0
-    for (i in 0 until list.size){
+    for (i in 0 until list.size) {
         list[i] += result
         result = list[i]
     }
@@ -201,12 +204,11 @@ fun factorize(n: Int): List<Int> {
     val result = mutableListOf<Int>()
     var newN = n
     var k = 2
-    while (k <= newN){
-        if (newN % k == 0){
+    while (k <= newN) {
+        if (newN % k == 0) {
             result.add(k)
             newN /= k
-        }
-        else k++
+        } else k++
     }
     return result
 }
@@ -218,6 +220,7 @@ fun factorize(n: Int): List<Int> {
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  */
 fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
+
 /**
  * Средняя
  *
@@ -226,7 +229,7 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
 fun convert(n: Int, base: Int): List<Int> {
-    var newN =n
+    var newN = n
     val result = mutableListOf<Int>()
     if (newN == 0)
         return listOf(n)
@@ -234,8 +237,8 @@ fun convert(n: Int, base: Int): List<Int> {
         while (newN > 0) {
             result.add(newN % base)
             newN /= base
-    }
-        return result.reversed()
+        }
+    return result.reversed()
 }
 
 /**
@@ -272,7 +275,7 @@ fun convertToString(n: Int, base: Int): String {
 fun decimal(digits: List<Int>, base: Int): Int {
     var result = 0
     var k = 0
-    for ( i in (digits.size - 1) downTo  0){
+    for (i in (digits.size - 1) downTo 0) {
         result += digits[i] * Math.pow(base.toDouble(), k.toDouble()).toInt()
         k++
     }
@@ -290,11 +293,10 @@ fun decimal(digits: List<Int>, base: Int): Int {
  */
 fun decimalFromString(str: String, base: Int): Int {
     val list = mutableListOf<Int>()
-    for (i in  str){
-        if (i in 'a'..'z'){
+    for (i in str) {
+        if (i in 'a'..'z') {
             list.add(i - 'a' + 10)
-        }
-        else {
+        } else {
             list.add(i.toString().toInt())
         }
     }
@@ -315,8 +317,8 @@ fun roman(n: Int): String {
     val rDigit = listOf("M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I")
     var newN = n
     var nRoman = ""
-    for (i in 0 until rDigit.size){
-        while (newN >= numbers[i]){
+    for (i in 0 until rDigit.size) {
+        while (newN >= numbers[i]) {
             newN -= numbers[i]
             nRoman += rDigit[i]
         }
