@@ -224,7 +224,6 @@ fun plusMinus(expression: String): Int {
         throw IllegalArgumentException(NumberFormatException("For input string : $expression"))
     }
 }
-
 /**
  * Сложная
  *
