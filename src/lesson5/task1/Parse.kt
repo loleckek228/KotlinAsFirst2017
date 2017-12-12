@@ -213,7 +213,7 @@ fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
     var result = parts[0].toInt()
     val words =
-            listOf("a", "b", "c", "d" , "e", "f", "g", "h", "i", "k", "l"
+            listOf("", "a", "b", "c", "d" , "e", "f", "g", "h", "i", "k", "l"
                     , "m", "n","o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
     try {
         for (i in 1 until parts.size step 2) {
