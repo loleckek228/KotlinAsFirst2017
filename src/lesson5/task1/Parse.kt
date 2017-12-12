@@ -99,16 +99,16 @@ fun dateStrToDigit(str: String): String {
 fun dateDigitToStr(digital: String): String {
     val parts = digital.split(".")
     val months =
-            listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа",
+            listOf("", "января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа",
                     "сентября", "октября", "ноября", "декабря")
     if (parts.size == 3) {
         try {
-            if (parts[1].toInt() == 0)
-                return ""
 
             val day = parts[0].toInt()
-            val month = months[parts[1].toInt() - 1]
+            val month = months[parts[1].toInt()]
             val year = parts[2].toInt()
+            if (month == "")
+                return ""
             return String.format("%d %s %s", day, month, year)
         } catch (e: NumberFormatException) {
             return ""
@@ -212,18 +212,25 @@ fun bestHighJump(jumps: String): Int {
 fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
     var result = parts[0].toInt()
+    val words =
+            listOf("a", "b", "c", "d" , "e", "f", "g", "h", "i", "k", "l"
+                    , "m", "n","o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
     try {
         for (i in 1 until parts.size step 2) {
-            when (parts[i]) {
-                "+" -> result += parts[i + 1].toInt()
-                "-" -> result -= parts[i + 1].toInt()
+            if (parts[i] !in words) {
+                when (parts[i]) {
+                    "+" -> result += parts[i + 1].toInt()
+                    "-" -> result -= parts[i + 1].toInt()
+                }
             }
         }
         return result
     } catch (e: NumberFormatException) {
         throw IllegalArgumentException(NumberFormatException("For input string : $expression"))
     }
+
 }
+
 /**
  * Сложная
  *
