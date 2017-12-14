@@ -374,12 +374,14 @@ fun russian(n: Int): String {
                 result.append(" " + toNine[n / 1000 % 10])
             }
         }
-        when (n / 1000 % 10) {
-            1 -> result.append(" тысяча ")
-            2 -> result.append(" тысячи ")
-            3 -> result.append(" тысячи ")
-            4 -> result.append(" тысячи ")
-            else -> result.append(" тысяч ")
+        if (n / 1000 % 100 in 11..19)
+            result.append(" тысяч ")
+        else {
+            when (n / 1000 % 10) {
+                1 -> result.append(" тысяча ")
+                in 2..4 -> result.append(" тысячи ")
+                else -> result.append(" тысяч ")
+            }
         }
     }
     result.append(lastThree(n % 1000))
