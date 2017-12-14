@@ -212,23 +212,20 @@ fun bestHighJump(jumps: String): Int {
 fun plusMinus(expression: String): Int {
     val parts = expression.split(" ")
     var result = parts[0].toInt()
-    val words =
-            listOf("", "a", "b", "c", "d" , "e", "f", "g", "h", "i", "k", "l"
-                    , "m", "n","o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
-    try {
-        for (i in 1 until parts.size step 2) {
-            if (parts[i] !in words) {
-                when (parts[i]) {
-                    "+" -> result += parts[i + 1].toInt()
-                    "-" -> result -= parts[i + 1].toInt()
-                }
+        try {
+            for (i in 1 until parts.lastIndex step 2) {
+                if (parts[i] in "+-") {
+                    when (parts[i]) {
+                        "+" -> result += parts[i + 1].toInt()
+                        "-" -> result -= parts[i + 1].toInt()
+                    }
+                } else
+                    throw IllegalArgumentException()
             }
+            return result
+        } catch (e: NumberFormatException) {
+            throw IllegalArgumentException(NumberFormatException("For input string : $expression"))
         }
-        return result
-    } catch (e: NumberFormatException) {
-        throw IllegalArgumentException(NumberFormatException("For input string : $expression"))
-    }
-
 }
 
 /**
