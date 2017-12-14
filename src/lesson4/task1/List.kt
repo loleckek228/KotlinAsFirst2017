@@ -333,4 +333,57 @@ fun roman(n: Int): String {
  * Например, 375 = "триста семьдесят пять"
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+val toNine = listOf("", "одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
+val toNineteen =
+        listOf("", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать",
+                "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать")
+val tens =
+        listOf("", "десять", "двадцать", "тридцать", "сорок", "пятьдесят",
+                "шестьдесят", "семьдесят", "восемьдесят", "девяносто")
+val hundreds =
+        listOf("", "сто", "двести", "триста", "четыреста",
+                "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот")
+fun lastThree(n: Int): String {
+    val result = StringBuilder()
+    if (n > 0) {
+        result.append(hundreds[n / 100 % 10])
+        if (n % 100 in 11..19)
+            result.append(" " + toNineteen[n % 10])
+        else {
+            result.append(" " + tens[n / 10 % 10])
+            when (n % 10) {
+                1 -> result.append(" один")
+                2 -> result.append(" два")
+                else -> result.append(" " + toNine[n % 10])
+            }
+        }
+    }
+    return result.toString().replace("  ", " ")
+}
+fun russian(n: Int): String {
+    val result = StringBuilder()
+    var newN = n
+    if (n > 999) {
+        newN /= 1000
+        result.append(hundreds[n / 100000 % 10])
+        when (n / 1000 % 100) {
+            in 11..19 -> result.append(" " + toNineteen[n / 1000 % 10])
+            0 -> result.append("")
+            else -> {
+                result.append(" " + tens[n / 10000 % 10])
+                result.append(" " + toNine[n / 1000 % 10])
+            }
+        }
+        when (n / 1000 % 10) {
+            1 -> result.append(" тысяча ")
+            2 -> result.append(" тысячи ")
+            3 -> result.append(" тысячи ")
+            4 -> result.append(" тысячи ")
+            else -> result.append(" тысяч ")
+        }
+    }
+    result.append(lastThree(n % 1000))
+    val strResult = result.toString()
+
+    return strResult.replace("  ", " ").trim()
+}
